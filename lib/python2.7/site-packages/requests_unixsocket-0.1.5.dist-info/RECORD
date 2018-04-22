@@ -1,0 +1,16 @@
+requests_unixsocket/__init__.py,sha256=_SzyTnexKzhCfmtiIRbrDpLNpKYJuf01QyyNHw76bF0,2077
+requests_unixsocket/adapters.py,sha256=WsM5lvhNpQF9R2jZ_qOCdF2Y_o3-Xy9Z1exW78gEpO8,2142
+requests_unixsocket/testutils.py,sha256=knU4P4lvwvogbEqRAJ-X77ojHD2V5rTDcYaLat_JreQ,3093
+requests_unixsocket/tests/test_requests_unixsocket.py,sha256=ZLhywOoQnqAbEzEuBk2Y3BG3ySnPwSa5w6TLkOUTKpQ,5148
+requests_unixsocket-0.1.5.dist-info/DESCRIPTION.rst,sha256=PMkDPPYNclwwL4HpLiMEBJR98sWt40zF4ZJAdJD5my0,1877
+requests_unixsocket-0.1.5.dist-info/METADATA,sha256=FZocct7EeO3QI_kqOHHWnQa6hjCTqhSI76q7dn0XBKk,2799
+requests_unixsocket-0.1.5.dist-info/RECORD,,
+requests_unixsocket-0.1.5.dist-info/WHEEL,sha256=kdsN-5OJAZIiHN-iO4Rhl82KyS0bDWf4uBwMbkNafr8,110
+requests_unixsocket-0.1.5.dist-info/metadata.json,sha256=f6IDGfc5EZOXA24t4qbE6LPihp-YX6SWi0APL1ayoME,1148
+requests_unixsocket-0.1.5.dist-info/pbr.json,sha256=7CF5ha5ARbJJ5LA8RUG6wY76u18W7wmocun5-Az-su8,47
+requests_unixsocket-0.1.5.dist-info/top_level.txt,sha256=Y1EEbvkeC5k8NXwoNkaqjeDlx2oDGfUJrbEubbBbjcc,20
+requests_unixsocket-0.1.5.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
+requests_unixsocket/__init__.pyc,,
+requests_unixsocket/testutils.pyc,,
+requests_unixsocket/tests/test_requests_unixsocket.pyc,,
+requests_unixsocket/adapters.pyc,,

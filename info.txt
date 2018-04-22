@@ -1,0 +1,28 @@
+Nombre: c1
+Remote: unix://
+Arquitectura: x86_64
+Creación: 2018/03/28 15:52 UTC
+Estado: Running
+Type: persistent
+Perfiles: default
+PID: 2342
+Ips:
+  eth0:	inet6	fe80::216:3eff:fec4:8595	vethN131VJ
+  lo:	inet	127.0.0.1
+  lo:	inet6	::1
+Resources:
+  Procesos: 15
+  Memory usage:
+    Memory (current): 96.50MB
+    Memory (peak): 123.13MB
+  Network usage:
+    eth0:
+      Bytes received: 62.96kB
+      Bytes sent: 1.26kB
+      Packets received: 390
+      Packets sent: 17
+    lo:
+      Bytes received: 5.28kB
+      Bytes sent: 5.28kB
+      Packets received: 72
+      Packets sent: 72
