@@ -120,7 +120,6 @@
 
   		    <ul class="dropdown-menu" role="menu">
 		      <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
-    		      <li><a href="/savestate">Guardar estado</a></li>
     		      <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
     		      <li><a href="/createimage">Crear snapshot</a></li>
   		    </ul>
@@ -137,7 +136,6 @@
                     </button>
 
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="/savestate">Guardar estado</a></li>
 		      <li><a href="/conectar/{{lista[i]["nombre"]}}">Conectar</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
 		      <li><a href="/restart">Reiniciar</a></li>
@@ -157,7 +155,6 @@
 
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
-                      <li><a href="/savestate">Guardar estado</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
                     </ul>
                   </div>

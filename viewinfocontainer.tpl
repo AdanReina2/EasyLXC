@@ -62,7 +62,9 @@
       </ol>
     </section>
     <section class="content">
-      {{ file }}
+      % for i in xrange(lenlista):
+	<li>{{ lista[i] }}</li>
+      % end
     </section>
   </div>
 %include('foot.tpl')

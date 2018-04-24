@@ -19,21 +19,15 @@ def login():
 
 @route('/inicio')
 def consulta():
-	uptime = commands.getoutput("uptime -p")
 	totalactivos = 0
 	totalapagados = 0
 	todos = client.containers.all()
-	ramtotal = commands.getoutput("free -h | grep Mem: | cut -d' ' -f12")
-	ramused = commands.getoutput("cat /proc/meminfo | grep MemAvailable")
-	ramused = ramused.lstrip("MemAvailable:")
-	ramused = ramused.rstrip("kB")
-	ramused = int(ramused)/1024
 	for i in todos:
 		if i.status == "Running":
 			totalactivos = totalactivos + 1
 		else:
 			totalapagados = totalapagados + 1
-	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime)
+	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos)
 
 @route('/contenedores')
 def contenedores():
@@ -49,7 +43,13 @@ def contenedores():
 		listaima.append({"nombre":a.properties["description"],"code":a.fingerprint})
 		lenlistaima = lenlistaima + 1
 	for i in todos:
-		lista.append({"nombre":i.name,"tipo":i.ephemeral,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":i.expanded_config["volatile.base_image"],"arch":i.architecture,"perfiles":i.profiles})
+		grep = "grep "+str(i.name)
+		print grep
+		com = "lxc list | "+ cut -d"grep+" | cut -d"|" -f4"
+		print com
+		ip = os.system(com)
+		print ip
+		lista.append({"nombre":i.name,"tipo":i.ephemeral,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":i.expanded_config["volatile.base_image"],"arch":i.architecture,"perfiles":i.profiles,"ip":ip})
 		lenlista = lenlista + 1
 	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima)
 
@@ -100,13 +100,7 @@ def rename2(name):
 def viewinfocontainer(name):
 	info = commands.getoutput('lxc info '+name+' > /usr/share/files/'+name+'.txt')
 	file = open('/usr/share/files/'+name+'.txt')
-	leer = file.readlines()
-	lista = []
-	for i in leer:
-		lista.append(i)
-	lenlista = len(lista)
-	print lenlista
-	return template('viewinfocontainer.tpl',user=usuario,info=info,lenlista=lenlista,lista=lista)
+	return template('viewinfocontainer.tpl',user=usuario,info=info,file=file)
 
 @route('/crearcontenedor')
 def crearcontenedor():

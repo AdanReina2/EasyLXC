@@ -2,9 +2,8 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
   <header class="main-header">
-    <a class="logo">
-      <span class="logo-lg"><b>EasyLXC</b></span>
-      <img src="/static/images/lxdock.png">
+    <a href="/inicio" class="logo">
+      <span class="logo-lg"><img src="/static/images/logo.png"></span>
     </a>
     <nav class="navbar navbar-static-top">
       <div class="navbar-custom-menu">
@@ -30,12 +29,21 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
+	<li class="header">UPTIME</li>
+	<li class="treeview">
+	  <a href="/inicio">
+	    <i class="fa fa-arrow-up"></i> <span>{{ uptime }}</span>
+	  </a>
+	</li>
+      </ul>
+      <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
         <li class="active treeview">
-          <a href="/">
-            <i class="fa fa-window-maximize"></i> <span>Página principal</span>
-          </a>
+          <a href="/inicio">
+	    <i class="fa fa-window-maximize"></i>Pagina Principal</a>
+	  </a>
         </li>
+	</a>
         <li class="treeview">
                 <li><a href="/contenedores"><i class="fa fa-cubes"></i>Contenedores</a></li>
         </li>
@@ -48,6 +56,22 @@
         <li class="treeview">
         	<li><a href="/redes"><i class="fa fa-edit"></i>Redes</a></li>
         </li>
+        <li class="header">ALERTAS</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Criticas</span>
+          <span class="pull-right-container">
+            <small class="label pull-right bg-red">1</small>
+          </span>
+        </a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Importantes</span>
+          <span class="pull-right-container">
+            <small class="label pull-right bg-yellow">1</small>
+          </span>
+        </a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Informativas</span>
+          <span class="pull-right-container">
+            <small class="label pull-right bg-blue">1</small>
+          </span>
+        </a></li>
       </ul>
     </section>
   </aside>
@@ -62,6 +86,9 @@
       </ol>
     </section>
     <section class="content">
+      <h1>
+        Información de contenedores
+      </h1>
       <div class="row">
         <div class="col-lg-3 col-xs-6">
           <div class="small-box bg-green">
@@ -71,7 +98,7 @@
               <p>Contenedores activos</p>
             </div>
             <div class="icon">
-              <i class="ion ion-thumbsup"></i>
+              <i class="ion ion-arrow-up-b"></i>
             </div>
             <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -84,9 +111,32 @@
               <p>Contenedores apagados</p>
             </div>
             <div class="icon">
-              <i class="ion ion-thumbsdown"></i>
+              <i class="ion ion-arrow-down-b"></i>
             </div>
             <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <h1>
+        Información de los recursos del anfitrión
+      </h1>
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{{ ramtotal }}</h3>
+
+              <p>Memoria RAM total del anfitrión</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{{ ramused }}M</h3>
+
+              <p>Memoria RAM usada</p>
+            </div>
           </div>
         </div>
       </div>
