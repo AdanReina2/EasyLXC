@@ -120,9 +120,14 @@
       <h1>
         Información de los recursos del anfitrión
       </h1>
+      <div class="callout callout-info">
+        <h4>{{ modelprocessor }}</h4>
+
+        <p>Modelo del procesador</p>
+      </div>
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-green">
+          <div class="small-box bg-aqua">
             <div class="inner">
               <h3>{{ ramtotal }}</h3>
 
@@ -131,7 +136,7 @@
           </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-red">
+          <div class="small-box bg-aqua">
             <div class="inner">
               <h3>{{ ramused }}M</h3>
 

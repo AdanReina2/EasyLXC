@@ -28,12 +28,14 @@ def consulta():
 	ramused = ramused.lstrip("MemAvailable:")
 	ramused = ramused.rstrip("kB")
 	ramused = int(ramused)/1024
+	modelprocessor = commands.getoutput("cat /proc/cpuinfo | grep 'model name' | cut -f2")
+	modelprocessor = modelprocessor.lstrip(":")
 	for i in todos:
 		if i.status == "Running":
 			totalactivos = totalactivos + 1
 		else:
 			totalapagados = totalapagados + 1
-	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime)
+	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime,modelprocessor=modelprocessor)
 
 @route('/contenedores')
 def contenedores():
