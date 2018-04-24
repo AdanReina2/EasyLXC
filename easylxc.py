@@ -31,6 +31,7 @@ def consulta():
 	lenramused = len(ramused)
 	ramused = ramused[:lenramused - 3]
 	ramused = int(ramused)/1024
+	ramused = int(ramtotal)-int(ramused)
 	limiteram = int(ramtotal)*70
 	limiteram = int(limiteram)/100
 	disktotal = commands.getoutput("df -h /dev/sda1 | tr -s ' ' | cut -d ' ' -f2 | tail -1")
