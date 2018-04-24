@@ -129,21 +129,63 @@
         <div class="col-lg-3 col-xs-6">
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>{{ ramtotal }}</h3>
+              <h3>{{ ramtotal }}M</h3>
 
               <p>Memoria RAM total del anfitrión</p>
             </div>
           </div>
         </div>
+	% if ramused > limiteram:
+          <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3>{{ ramused }}M</h3>
+
+                <p>Memoria RAM usada</p>
+              </div>
+            </div>
+          </div>
+	% else:
+	  <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3>{{ ramused }}M</h3>
+
+                <p>Memoria RAM usada</p>
+              </div>
+            </div>
+          </div>
+	% end
         <div class="col-lg-3 col-xs-6">
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>{{ ramused }}M</h3>
+              <h3>{{ disktotal }}G</h3>
 
-              <p>Memoria RAM usada</p>
+              <p>Espacio de disco total del anfitrión</p>
             </div>
           </div>
         </div>
+        % if diskused > limitedisk:
+          <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3>{{ diskused }}</h3>
+
+                <p>Espacio de disco usado del anfitrión</p>
+              </div>
+            </div>
+          </div>
+        % else:
+          <div class="col-lg-3 col-xs-6">
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3>{{ diskused }}</h3>
+
+                <p>Espacio de disco usado del anfitrión</p>
+              </div>
+            </div>
+          </div>
+        % end
       </div>
     </section>
   </div>

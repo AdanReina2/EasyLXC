@@ -24,10 +24,21 @@ def consulta():
 	totalapagados = 0
 	todos = client.containers.all()
 	ramtotal = commands.getoutput("free -h | grep Mem: | cut -d' ' -f12")
+	lenramtotal = len(ramtotal)
+	ramtotal = ramtotal[:lenramtotal - 1]
 	ramused = commands.getoutput("cat /proc/meminfo | grep MemAvailable")
 	ramused = ramused.lstrip("MemAvailable:")
-	ramused = ramused.rstrip("kB")
+	lenramused = len(ramused)
+	ramused = ramused[:lenramused - 3]
 	ramused = int(ramused)/1024
+	limiteram = int(ramtotal)*70
+	limiteram = int(limiteram)/100
+	disktotal = commands.getoutput("df -h /dev/sda1 | tr -s ' ' | cut -d ' ' -f2 | tail -1")
+	diskused = commands.getoutput("df -h /dev/sda1 | tr -s ' ' | cut -d ' ' -f3 | tail -1")
+	lendisktotal = len(disktotal)
+	disktotal = disktotal[:lendisktotal - 1]
+	limitedisk = int(disktotal)*70
+	limitedisk = int(limitedisk)/100
 	modelprocessor = commands.getoutput("cat /proc/cpuinfo | grep 'model name' | cut -f2")
 	modelprocessor = modelprocessor.lstrip(":")
 	for i in todos:
@@ -35,7 +46,7 @@ def consulta():
 			totalactivos = totalactivos + 1
 		else:
 			totalapagados = totalapagados + 1
-	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime,modelprocessor=modelprocessor)
+	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime,modelprocessor=modelprocessor,limiteram=limiteram,disktotal=disktotal,diskused=diskused,limitedisk=limitedisk)
 
 @route('/contenedores')
 def contenedores():
