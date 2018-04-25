@@ -12,13 +12,15 @@ from pylxd import Client
 client = Client()
 
 usuario = getpass.getuser()
+conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',host='localhost')
+cur = conn.cursor()
 
 @route('/')
 def login():
 	return template('login.tpl')
 
 @route('/inicio')
-def consulta():
+def inicio():
 	uptime = commands.getoutput("uptime -p")
 	totalactivos = 0
 	totalapagados = 0
@@ -63,7 +65,10 @@ def contenedores():
 		listaima.append({"nombre":a.properties["description"],"code":a.fingerprint})
 		lenlistaima = lenlistaima + 1
 	for i in todos:
-		lista.append({"nombre":i.name,"tipo":i.ephemeral,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":i.expanded_config["volatile.base_image"],"arch":i.architecture,"perfiles":i.profiles})
+		ip = commands.getoutput("lxc list " + i.name + " -c '4' | tail -2 | head -1")
+		ip = ip.lstrip("| ")
+		ip = ip.rstrip(" |")
+		lista.append({"nombre":i.name,"tipo":i.ephemeral,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":"none","arch":i.architecture,"perfiles":i.profiles,"ip":ip})
 		lenlista = lenlista + 1
 	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima)
 
@@ -96,6 +101,12 @@ def start(name):
         conttofreeze = client.containers.get(name)
         conttoactivate.freeze()
         redirect ('/contenedores')
+
+@route('/restart/<name>',method='get')
+def restart(name):
+	conttorestart = client.containers.get(name)
+	conttorestart.restart()
+	redirect ('/contenedores')
 
 @route('/rename/<name>',method='get')
 def rename(name):
@@ -137,11 +148,14 @@ def crearcontenedor3(distro,release):
 	name = request.forms.get('nombre')
 	container = 'lxc launch images:'+str(distro)+'/'+str(release)+'/amd64 '+str(name)
 	os.system(container)
+	cur.execute("insert into contenedores values (\'" + str(name) + "\',\'" + str(distro) + "\',\'" + str(release) + "\')")
 	redirect ('/contenedores')
 
-@route('/eliminarcontenedor')
-def crearcontenedor():
-	return template('eliminarcontenedor.tpl',user=usuario)
+@route('/eliminarcontenedor/<nombre>',method='get')
+def eliminarcontenedor(nombre):
+	container = 'lxc delete ' + str(nombre) + ' --force'
+	os.system(container)
+	redirect ('/contenedores')
 
 @route('/graficas')
 def graficas():

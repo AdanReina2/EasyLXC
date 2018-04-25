@@ -79,7 +79,9 @@
 	<table class="paleBlueRows">
 	  <thead>
 	    <tr>
+	      <th> </th>
               <th>Nombre</th>
+	      <th>IP</th>
 	      <th>Ephemeral</th>
 	      <th>Arquitectura</th>
 	      <th>Imagen</th>
@@ -92,7 +94,13 @@
           <tbody>
 	  % for i in xrange(lenlista):
 	    <tr>
+	      <td>
+		<label>
+                  <input type="checkbox" class="minimal" value=lista[i]["nombre"]>
+                </label>
+	      </td>
 	      <td>{{ lista[i]["nombre"] }}</td>
+	      <td>{{ lista[i]["ip"] }}</td>
 	      <td>{{ lista[i]["tipo"]  }}</td>
 	      <td>{{ lista[i]["arch"] }}</td>
        	      % for h in xrange(lenlistaima):
@@ -119,6 +127,7 @@
 		      <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
     		      <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
     		      <li><a href="/createimage">Crear snapshot</a></li>
+		      <li><a href="/eliminarcontenedor/{{lista[i]["nombre"]}}"><FONT COLOR="red">Eliminar contenedor</FONT></a></li>
   		    </ul>
 		  </div>
 	        </td>
@@ -135,8 +144,9 @@
                     <ul class="dropdown-menu" role="menu">
 		      <li><a href="/conectar/{{lista[i]["nombre"]}}">Conectar</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
-		      <li><a href="/restart">Reiniciar</a></li>
+		      <li><a href="/restart/{{lista[i]["nombre"]}}">Reiniciar</a></li>
 		      <li><a href="/suspend">Suspender</a></li>
+		      <li><a href="/eliminarcontenedor/{{lista[i]["nombre"]}}"><FONT COLOR="red">Eliminar contenedor</FONT></a></li>
                     </ul>
                   </div>
                 </td>
@@ -153,6 +163,7 @@
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
+		      <li><a href="/eliminarcontenedor/{{lista[i]["nombre"]}}"><FONT COLOR="red">Eliminar contenedor</FONT></a></li>
                     </ul>
                   </div>
                 </td>
