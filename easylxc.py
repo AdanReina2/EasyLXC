@@ -12,7 +12,7 @@ from pylxd import Client
 client = Client()
 
 usuario = getpass.getuser()
-conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',host='localhost')
+conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',host='172.16.101.170')
 cur = conn.cursor()
 
 @route('/')
@@ -65,10 +65,17 @@ def contenedores():
 		listaima.append({"nombre":a.properties["description"],"code":a.fingerprint})
 		lenlistaima = lenlistaima + 1
 	for i in todos:
+		cur.execute("select * from contenedores")
+		rows = cur.fetchall()
+		for z in rows:
+			if i.name == z[0]:
+				imagencont = str(z[1]) + " " + str(z[2])
+			else:
+				imagencont = "None"
 		ip = commands.getoutput("lxc list " + i.name + " -c '4' | tail -2 | head -1")
 		ip = ip.lstrip("| ")
 		ip = ip.rstrip(" |")
-		lista.append({"nombre":i.name,"tipo":i.ephemeral,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":"none","arch":i.architecture,"perfiles":i.profiles,"ip":ip})
+		lista.append({"nombre":i.name,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":imagencont,"arch":i.architecture,"ip":ip})
 		lenlista = lenlista + 1
 	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima)
 
@@ -149,6 +156,12 @@ def crearcontenedor3(distro,release):
 	container = 'lxc launch images:'+str(distro)+'/'+str(release)+'/amd64 '+str(name)
 	os.system(container)
 	cur.execute("insert into contenedores values (\'" + str(name) + "\',\'" + str(distro) + "\',\'" + str(release) + "\')")
+	print "insert into contenedores values (\'" + str(name) + "\',\'" + str(distro) + "\',\'" + str(release) + "\')"
+	cur.execute("select * from contenedores")
+	rows = cur.fetchall()
+	for i in rows:
+		print i
+	conn.commit()
 	redirect ('/contenedores')
 
 @route('/eliminarcontenedor/<nombre>',method='get')

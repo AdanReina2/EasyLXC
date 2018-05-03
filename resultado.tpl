@@ -189,4 +189,5 @@
       </div>
     </section>
   </div>
+</script>
 %include('foot.tpl')

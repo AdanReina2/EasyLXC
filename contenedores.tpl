@@ -82,10 +82,8 @@
 	      <th> </th>
               <th>Nombre</th>
 	      <th>IP</th>
-	      <th>Ephemeral</th>
 	      <th>Arquitectura</th>
 	      <th>Imagen</th>
-              <th>Perfiles</th>
 	      <th>Estado</th>
 	      <th>Fecha de Creación</th>
 	      <th>Acciones</th>
@@ -101,17 +99,13 @@
 	      </td>
 	      <td>{{ lista[i]["nombre"] }}</td>
 	      <td>{{ lista[i]["ip"] }}</td>
-	      <td>{{ lista[i]["tipo"]  }}</td>
 	      <td>{{ lista[i]["arch"] }}</td>
-       	      % for h in xrange(lenlistaima):
-	        % if listaima[h]["code"] == lista[i]["imagen"]:
-		  <td>{{ listaima[h]["nombre"] }}</td>
-		% end
+	      <td>{{ lista[i]["imagen"] }}</td>
+	      % if lista[i]["estado"] == 'Running':
+	        <td><small class="label pull-right bg-green">{{ lista[i]["estado"] }}</small></td>
+	      % else:
+		<td><small class="label pull-right bg-red">{{ lista[i]["estado"] }}</small></td>
 	      % end
-	      % for j in lista[i]["perfiles"]:
-	        <td>{{ j }}</td>
-	      % end
-              <td>{{ lista[i]["estado"] }}</td>
               <td>{{ lista[i]["alive"] }}</td>
 	      % if lista[i]["estado"] == 'Stopped':
 	        <td>
