@@ -76,11 +76,31 @@
                 </br>
                 <p>Distribución del SO: {{ distro }}</p>
                 <p>Versión de la distribución: {{ release }}</p>
-                <div class="box-footer clearfix">
+		<div class="box-footer clearfix" data-target="#modal-info">
                   <input class="btn btn-primary btn-flat" display="inline-block" type="submit" value="Crear contenedor">
                 </div>
               </form>
             </div>
+	<div class="modal modal-info fade" id="modal-info">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Creación del contenedor</h4>
+              </div>
+              <div class="modal-body">
+                <p>Se está creando el contenedor ...</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
       </div>
     </section>
   </div>

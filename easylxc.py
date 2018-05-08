@@ -25,15 +25,16 @@ def inicio():
 	totalactivos = 0
 	totalapagados = 0
 	todos = client.containers.all()
-	ramtotal = commands.getoutput("free -h | grep Mem: | cut -d' ' -f12")
+	ramtotal = commands.getoutput("free -m | grep Mem: | cut -d' ' -f12")
 	lenramtotal = len(ramtotal)
-	ramtotal = ramtotal[:lenramtotal - 1]
 	ramused = commands.getoutput("cat /proc/meminfo | grep MemAvailable")
 	ramused = ramused.lstrip("MemAvailable:")
 	lenramused = len(ramused)
 	ramused = ramused[:lenramused - 3]
 	ramused = int(ramused)/1024
-	ramused = int(ramtotal)-int(ramused)
+	print ramtotal
+	print ramused
+	ramused = int(ramtotal)-ramused
 	limiteram = int(ramtotal)*70
 	limiteram = int(limiteram)/100
 	disktotal = commands.getoutput("df -h /dev/sda1 | tr -s ' ' | cut -d ' ' -f2 | tail -1")
