@@ -121,14 +121,17 @@
 		      <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
     		      <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
     		      <li><a href="/createimage">Crear snapshot</a></li>
-		      <li><a href="/eliminarcontenedor/{{lista[i]["nombre"]}}"><FONT COLOR="red" data-target="#eliminar-individual">Eliminar contenedor</FONT></a></li>
+		      <li><a class="btn btn-danger btn-flat" data-target="#eliminar-combinador" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar contenedor</a></li>
   		    </ul>
 		  </div>
 	        </td>
 	      % elif lista[i]["estado"] == 'Running':
 		<td>
                   <div class="btn-group">
+		    <button type="button" class="btn btn-success btn-flat disabled"><i class="fa fa-play"></i></button>
+		    <button type="button" class="btn btn-warning btn-flat"><i class="fa fa-pause" href="/stop/{{lista[i]["nombre"]}}></i></button>
 		    <a class="btn btn-default btn-flat" href="/stop/{{lista[i]["nombre"]}}">Detener</a>
+		    <button type="button" class="btn btn-danger btn-flat" data-target="#eliminar-combiandos"><i class="fa fa-times"></i></button>
                     <button type="button" class="btn btn-default btn-flatdropdown-toggle"
                           data-toggle="dropdown">
                       <span class="caret"></span>
@@ -140,7 +143,7 @@
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
 		      <li><a href="/restart/{{lista[i]["nombre"]}}">Reiniciar</a></li>
 		      <li><a href="/suspend">Suspender</a></li>
-		      <li><a href="/eliminarcontenedor/{{lista[i]["nombre"]}}"><FONT COLOR="red" data-target="#eliminar-individual">Eliminar contenedor</FONT></a></li>
+		      <li><a class="btn btn-danger btn-flat" data-target="#eliminar-combinador" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar contenedor</a></li>
                     </ul>
                   </div>
                 </td>
@@ -157,7 +160,7 @@
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
-		      <li><a href="/eliminarcontenedor/{{lista[i]["nombre"]}}"><FONT COLOR="red" data-target="#eliminar-individual">Eliminar contenedor</FONT></a></li>
+		      <li><a class="btn btn-danger btn-flat" data-target="#eliminar-combinador" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar contenedor</a></li>
                     </ul>
                   </div>
                 </td>
