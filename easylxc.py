@@ -32,8 +32,6 @@ def inicio():
 	lenramused = len(ramused)
 	ramused = ramused[:lenramused - 3]
 	ramused = int(ramused)/1024
-	print ramtotal
-	print ramused
 	ramused = int(ramtotal)-ramused
 	limiteram = int(ramtotal)*70
 	limiteram = int(limiteram)/100

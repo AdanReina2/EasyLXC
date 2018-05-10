@@ -79,7 +79,6 @@
 	<table class="paleBlueRows">
 	  <thead>
 	    <tr>
-	      <th> </th>
               <th>Nombre</th>
 	      <th>IP</th>
 	      <th>Arquitectura</th>
@@ -92,11 +91,6 @@
           <tbody>
 	  % for i in xrange(lenlista):
 	    <tr>
-	      <td>
-		<label>
-                  <input type="checkbox" class="minimal" value=lista[i]["nombre"]>
-                </label>
-	      </td>
 	      <td>{{ lista[i]["nombre"] }}</td>
 	      <td>{{ lista[i]["ip"] }}</td>
 	      <td>{{ lista[i]["arch"] }}</td>
@@ -110,8 +104,33 @@
 	      % if lista[i]["estado"] == 'Stopped':
 	        <td>
 		  <div class="btn-group">
-	            <a class="btn btn-default btn-flat" href="/start/{{lista[i]["nombre"]}}">Arrancar</a>
-		    <button type="button" class="btn btn-default btn-flat dropdown-toggle"
+		    <a class="btn btn-success btn-flat" href="/start/{{lista[i]["nombre"]}}" title="Encender"><i class="fa fa-play"></i></a>
+                    <button type="button" class="btn btn-warning btn-flat disabled" title="Apagar"><i class="fa fa-pause"></i></button>
+                    <button type="button" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar-{{lista[i]["nombre"]}}" title="Eliminar">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+		    <div class="modal modal-danger fade" id="eliminar-{{lista[i]["nombre"]}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Eliminar contenedor <strong>{{lista[i]["nombre"]}}</strong></h4>
+                          </div>
+                          <div class="modal-body">
+                            <p>Al continuar con esta acción, se eliminará el contenedor <strong>{{lista[i]["nombre"]}}</strong></p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-flat pull-left" data-dismiss="modal">Cancelar</button>
+                            <a class="btn btn-danger btn-flat" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar</a>
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+		    <button type="button" class="btn btn-default btn-flatdropdown-toggle"
           		  data-toggle="dropdown">
     		      <span class="caret"></span>
                       <span class="sr-only">Desplegar menú</span>
@@ -121,29 +140,47 @@
 		      <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
     		      <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
     		      <li><a href="/createimage">Crear snapshot</a></li>
-		      <li><a class="btn btn-danger btn-flat" data-target="#eliminar-combinador" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar contenedor</a></li>
   		    </ul>
 		  </div>
 	        </td>
 	      % elif lista[i]["estado"] == 'Running':
 		<td>
                   <div class="btn-group">
-		    <button type="button" class="btn btn-success btn-flat disabled"><i class="fa fa-play"></i></button>
-		    <button type="button" class="btn btn-warning btn-flat"><i class="fa fa-pause" href="/stop/{{lista[i]["nombre"]}}></i></button>
-		    <a class="btn btn-default btn-flat" href="/stop/{{lista[i]["nombre"]}}">Detener</a>
-		    <button type="button" class="btn btn-danger btn-flat" data-target="#eliminar-combiandos"><i class="fa fa-times"></i></button>
+		    <button type="button" class="btn btn-success btn-flat disabled" title="Encender"><i class="fa fa-play"></i></button>
+		    <a class="btn btn-warning btn-flat" href="/stop/{{lista[i]["nombre"]}}" title="Apagar"><i class="fa fa-pause"></i></a>
+		    <button type="button" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar-{{lista[i]["nombre"]}}" title="Eliminar">
+                	<i class="fa fa-times" aria-hidden="true"></i>
+        	    </button>
                     <button type="button" class="btn btn-default btn-flatdropdown-toggle"
                           data-toggle="dropdown">
                       <span class="caret"></span>
                       <span class="sr-only">Desplegar menú</span>
                     </button>
-
+		    <div class="modal modal-danger fade" id="eliminar-{{lista[i]["nombre"]}}">
+          	      <div class="modal-dialog">
+            		<div class="modal-content">
+              		  <div class="modal-header">
+                	    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  	      <span aria-hidden="true">&times;</span></button>
+                	    <h4 class="modal-title">Eliminar contenedor <strong>{{lista[i]["nombre"]}}</strong></h4>
+              		  </div>
+              		  <div class="modal-body">
+                	    <p>Al continuar con esta acción, se eliminará el contenedor <strong>{{lista[i]["nombre"]}}</strong></p>
+              		  </div>
+              		  <div class="modal-footer">
+                	    <button type="button" class="btn btn-danger btn-flat pull-left" data-dismiss="modal">Cancelar</button>
+                	    <a class="btn btn-danger btn-flat" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar</a>
+              		  </div>
+            		</div>
+            		<!-- /.modal-content -->
+          	      </div>
+          	      <!-- /.modal-dialog -->
+        	    </div>
+        	    <!-- /.modal -->
                     <ul class="dropdown-menu" role="menu">
 		      <li><a href="/conectar/{{lista[i]["nombre"]}}">Conectar</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
-		      <li><a href="/restart/{{lista[i]["nombre"]}}">Reiniciar</a></li>
 		      <li><a href="/suspend">Suspender</a></li>
-		      <li><a class="btn btn-danger btn-flat" data-target="#eliminar-combinador" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar contenedor</a></li>
                     </ul>
                   </div>
                 </td>
@@ -173,52 +210,6 @@
 	</br>
 	<a class="btn btn-primary btn-flat" display="inline-block" href="/crearcontenedor"><i class="fa fa-plus-square" aria-hidden="true"></i>
 Crear nuevo contenedor</a>
-	<button type="button" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar-combinados">
-        	<i class="fa fa-minus-square" aria-hidden="true"></i>  Eliminar elementos seleccionados
-        </button>
-	<div class="modal modal-danger fade" id="eliminar-combinados">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">¿Desea realmente eliminar estos contenedores?</h4>
-              </div>
-              <div class="modal-body">
-                <p>One fine body&hellip;</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-flat pull-left" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger btn-flat">Eliminar</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-	<div class="modal modal-danger fade" id="eliminar-individual">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Danger Modal</h4>
-              </div>
-              <div class="modal-body">
-                <p>One fine body&hellip;</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline">Save changes</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
-      </div>
       </div>
     </section>
   </div>
