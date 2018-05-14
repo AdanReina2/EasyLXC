@@ -78,6 +78,11 @@ def contenedores():
 		lenlista = lenlista + 1
 	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima)
 
+@route('/snapshots')
+def snapshots():
+	uptime = commands.getoutput("uptime -p")
+	return template('snapshots.tpl',user=usuario,uptime=uptime)
+
 @route('/conectar/<name>',method='get')
 def conectar(name):
 	cad = "lxc exec " + name + " bash"
@@ -126,6 +131,17 @@ def rename2(name):
 	conttorename = client.containers.get(name)
 	conttorename.rename(newname,wait=True)
 	redirect ('/contenedores')
+
+@route('/crearsnapshot/<name>',method='post')
+def crearsnapshot(name):
+	container = client.containers.get(name)
+	return template('listsnapshots2.tpl',user=usuario,name=name)
+
+@route('/listsnapshots/<name>',method='get')
+def listsnapshots(name):
+	container = client.containers.get(name)
+	snapshots = container.snapshots.get()
+	return template('listsnapshots.tpl',user=usuario,snapshots=snapshots)
 
 @route('/viewinfocontainer/<name>')
 def viewinfocontainer(name):
