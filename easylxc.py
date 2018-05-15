@@ -126,16 +126,14 @@ def rename(name):
 @route('/rename2/<name>',method='post')
 def rename2(name):
 	newname = request.forms.get('newname')
-	print newname
-	print name
 	conttorename = client.containers.get(name)
 	conttorename.rename(newname,wait=True)
 	redirect ('/contenedores')
 
-@route('/crearsnapshot/<name>',method='post')
+@route('/crearsnapshot/<name>',method='get')
 def crearsnapshot(name):
 	container = client.containers.get(name)
-	return template('listsnapshots2.tpl',user=usuario,name=name)
+	return template('crearsnapshot.tpl',user=usuario,name=name)
 
 @route('/listsnapshots/<name>',method='get')
 def listsnapshots(name):
@@ -152,7 +150,6 @@ def viewinfocontainer(name):
 	for i in leer:
 		lista.append(i)
 	lenlista = len(lista)
-	print lenlista
 	return template('viewinfocontainer.tpl',user=usuario,info=info,lenlista=lenlista,lista=lista)
 
 @route('/crearcontenedor')
@@ -171,7 +168,6 @@ def crearcontenedor3(distro,release):
 	container = 'lxc launch images:'+str(distro)+'/'+str(release)+'/amd64 '+str(name)
 	os.system(container)
 	cur.execute("insert into contenedores values (\'" + str(name) + "\',\'" + str(distro) + "\',\'" + str(release) + "\')")
-	print "insert into contenedores values (\'" + str(name) + "\',\'" + str(distro) + "\',\'" + str(release) + "\')"
 	cur.execute("select * from contenedores")
 	rows = cur.fetchall()
 	for i in rows:
