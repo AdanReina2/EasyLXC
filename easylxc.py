@@ -48,6 +48,7 @@ def inicio():
 
 @route('/contenedores')
 def contenedores():
+	uptime = commands.getoutput("uptime -p")
 	todos = client.containers.all()
 	imagenes = client.images.all()
 	lista = []
@@ -72,7 +73,7 @@ def contenedores():
 		ip = ip.rstrip(" |")
 		lista.append({"nombre":i.name,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":imagencont,"arch":i.architecture,"ip":ip})
 		lenlista = lenlista + 1
-	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima)
+	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima,uptime=uptime)
 
 @route('/snapshots')
 def snapshots():
@@ -117,7 +118,8 @@ def restart(name):
 
 @route('/rename/<name>',method='get')
 def rename(name):
-	return template('rename.tpl',user=usuario,nombre=name)
+	uptime = commands.getoutput("uptime -p")
+	return template('rename.tpl',user=usuario,nombre=name,uptime=uptime)
 
 @route('/rename2/<name>',method='post')
 def rename2(name):
@@ -126,19 +128,30 @@ def rename2(name):
 	conttorename.rename(newname,wait=True)
 	redirect ('/contenedores')
 
-@route('/crearsnapshot/<name>',method='get')
+@route('/formcrearsnapshot/<name>')
+def formcrearsnapshot(name):
+	uptime = commands.getoutput("uptime -p")
+	return template('formcrearsnapshot.tpl',user=usuario,name=name,uptime=uptime)
+
+@route('/crearsnapshot/<name>',method='post')
 def crearsnapshot(name):
-	container = client.containers.get(name)
-	return template('crearsnapshot.tpl',user=usuario,name=name)
+	checkvalue = request.forms.get('check')
+	snapname = request.forms.get('nombre')
+	#container = client.snapshots.create()
+	print checkvalue
+	print snapname
+	redirect ('/listsnapshots/' + str(name))
 
 @route('/listsnapshots/<name>',method='get')
 def listsnapshots(name):
+	uptime = commands.getoutput("uptime -p")
 	container = client.containers.get(name)
-	snapshots = container.snapshots.get()
-	return template('listsnapshots.tpl',user=usuario,snapshots=snapshots)
+	snapshots = container.snapshots.all()
+	return template('snapshots.tpl',user=usuario,snapshots=snapshots,uptime=uptime)
 
 @route('/viewinfocontainer/<name>')
 def viewinfocontainer(name):
+	uptime = commands.getoutput("uptime -p")
 	info = commands.getoutput('lxc info '+name+' > /usr/share/files/'+name+'.txt')
 	file = open('/usr/share/files/'+name+'.txt')
 	leer = file.readlines()
@@ -146,7 +159,7 @@ def viewinfocontainer(name):
 	for i in leer:
 		lista.append(i)
 	lenlista = len(lista)
-	return template('viewinfocontainer.tpl',user=usuario,info=info,lenlista=lenlista,lista=lista,name=name)
+	return template('viewinfocontainer.tpl',user=usuario,info=info,lenlista=lenlista,lista=lista,name=name,uptime=uptime)
 
 @route('/crearcontenedor')
 def crearcontenedor():

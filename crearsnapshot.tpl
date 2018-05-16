@@ -55,7 +55,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Crear una nueva snapshot
+        Contenedores
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-window-maximize"></i>Home</a></li>
@@ -64,24 +64,6 @@
       </ol>
     </section>
     <section class="content">
-      <div class="box box-primary">
-            <div class="box-header">
-              <i class="fa fa-plus-square"></i>
-
-              <h3 class="box-title">Parametros</h3>
-            </div>
-            <div class="box-body">
-              <form action="/" method="post">
-                <input type="text" class="form-control" name="nombre" placeholder="Nombre de la snapshot">
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Guardar estado de la memoria RAM
-                  </label>
-                </div>
-                <input class="btn btn-primary btn-flat pull-right" display="inline-block" type="submit" value="Crear snapshot">
-              </form>
-            </div>
-      </div>
     </section>
   </div>
 %include('foot.tpl')

@@ -139,7 +139,7 @@
   		    <ul class="dropdown-menu" role="menu">
 		      <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
     		      <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
-    		      <li><a href="/crearsnapshot/{{lista[i]["nombre"]}}">Crear snapshot</a></li>
+    		      <li><a href="/formcrearsnapshot/{{lista[i]["nombre"]}}">Crear snapshot</a></li>
   		    </ul>
 		  </div>
 	        </td>
