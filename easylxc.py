@@ -16,10 +16,6 @@ conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',hos
 cur = conn.cursor()
 
 @route('/')
-def login():
-	return template('login.tpl')
-
-@route('/inicio')
 def inicio():
 	uptime = commands.getoutput("uptime -p")
 	totalactivos = 0
@@ -150,7 +146,7 @@ def viewinfocontainer(name):
 	for i in leer:
 		lista.append(i)
 	lenlista = len(lista)
-	return template('viewinfocontainer.tpl',user=usuario,info=info,lenlista=lenlista,lista=lista)
+	return template('viewinfocontainer.tpl',user=usuario,info=info,lenlista=lenlista,lista=lista,name=name)
 
 @route('/crearcontenedor')
 def crearcontenedor():

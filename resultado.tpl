@@ -39,7 +39,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
         <li class="active treeview">
-          <a href="/inicio">
+          <a href="/">
 	    <i class="fa fa-window-maximize"></i>Pagina Principal</a>
 	  </a>
         </li>
