@@ -97,13 +97,6 @@
       </select>
       </br>
       <button type="submit" class="btn btn-primary btn-flat pull-right" >Listar Snapshots</button>
-      </br>
-      </br>
-      </br>
-      <div class="callout callout-danger">
-        <h4>No se ha seleccionado ningún contenedor</h4>
-        Debe seleccionar un contenedores para mostrar las snapshots asociadas
-      </div>
     </section>
   </div>
 </script>

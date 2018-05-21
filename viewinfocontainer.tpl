@@ -63,7 +63,7 @@
     </section>
     <section class="content">
       % for i in xrange(lenlista):
-	<li>{{ lista[i] }}</li>
+	{{ lista[i] }}</br>
       % end
     </section>
   </div>

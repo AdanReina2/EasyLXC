@@ -42,7 +42,7 @@
                 <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
         </li>
         <li class="treeview">
-        	<li><a href="http://172.16.101.170/zabbix/hosts.php?ddreset=1"><i class="fa fa-pie-chart"></i>Monitorización</a></li>
+        	<li><a href="http://172.16.101.170/zabbix/hosts.php?ddreset=1"><i class="fa fa-bar-chart"></i>Zabbix (Métricas)</a></li>
         </li>
         <li class="treeview">
         	<li><a href="/redes"><i class="fa fa-edit"></i>Redes</a></li>
