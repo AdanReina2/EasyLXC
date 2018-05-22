@@ -20,6 +20,7 @@ def inicio():
 	uptime = commands.getoutput("uptime -p")
 	totalactivos = 0
 	totalapagados = 0
+	total = 0
 	todos = client.containers.all()
 	ramtotal = commands.getoutput("free -m | grep Mem: | cut -d' ' -f12")
 	lenramtotal = len(ramtotal)
@@ -40,11 +41,12 @@ def inicio():
 	modelprocessor = commands.getoutput("cat /proc/cpuinfo | grep 'model name' | cut -f2")
 	modelprocessor = modelprocessor.lstrip(":")
 	for i in todos:
+		total = total + 1
 		if i.status == "Running":
 			totalactivos = totalactivos + 1
 		else:
 			totalapagados = totalapagados + 1
-	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime,modelprocessor=modelprocessor,limiteram=limiteram,disktotal=disktotal,diskused=diskused,limitedisk=limitedisk)
+	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime,modelprocessor=modelprocessor,limiteram=limiteram,disktotal=disktotal,diskused=diskused,limitedisk=limitedisk,total=total)
 
 @route('/contenedores')
 def contenedores():

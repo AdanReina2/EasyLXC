@@ -90,7 +90,20 @@
         Información de contenedores
       </h1>
       <div class="row">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-md-4">
+          <div class="small-box bg-light-blue color-palette">
+            <div class="inner">
+              <h3>{{ total }}</h3>
+
+              <p>Total de contenedores</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-arrow-up-b"></i>
+            </div>
+            <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+	<div class="col-md-4">
           <div class="small-box bg-green">
             <div class="inner">
               <h3>{{ activos }}</h3>
@@ -103,7 +116,7 @@
             <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-md-4">
           <div class="small-box bg-red">
             <div class="inner">
               <h3>{{ apagados }}</h3>
@@ -120,14 +133,14 @@
       <h1>
         Información de los recursos del anfitrión
       </h1>
-      <div class="callout callout-info">
+      <div class="callout callout-default">
         <h4>{{ modelprocessor }}</h4>
 
         <p>Modelo del procesador</p>
       </div>
       <div class="row">
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-aqua">
+          <div class="small-box bg-light-blue color-palette">
             <div class="inner">
               <h3>{{ ramtotal }}M</h3>
 
@@ -157,7 +170,7 @@
           </div>
 	% end
         <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-aqua">
+          <div class="small-box bg-light-blue color-palette">
             <div class="inner">
               <h3>{{ disktotal }}G</h3>
 
