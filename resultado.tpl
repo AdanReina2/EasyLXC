@@ -113,7 +113,7 @@
             <div class="icon">
               <i class="ion ion-arrow-up-b"></i>
             </div>
-            <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
+	    <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col-md-4">
@@ -126,7 +126,7 @@
             <div class="icon">
               <i class="ion ion-arrow-down-b"></i>
             </div>
-            <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
+	    <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>
