@@ -139,9 +139,11 @@ def formcrearsnapshot(name):
 def crearsnapshot(name):
 	checkvalue = request.forms.get('check')
 	snapname = request.forms.get('nombre')
-	#container = client.snapshots.create()
-	print checkvalue
-	print snapname
+	container = client.containers.get(name)
+	if checkvalue == "on":
+		snap = container.snapshots.create(snapname, stateful=True, wait=True)
+	else:
+		snap = container.snapshots.create(snapname, stateful=False, wait=True)
 	redirect ('/listsnapshots/' + str(name))
 
 @route('/listsnapshots/<name>',method='get')
