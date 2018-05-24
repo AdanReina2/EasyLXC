@@ -78,7 +78,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Snapshots
+        Snapshots de <strong>{{ name }}</strong>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -86,17 +86,7 @@
       </ol>
     </section>
     <section class="content">
-      <select class="form-control select2" style="width: 100%;">
-        <option selected="selected">Alabama</option>
-        <option>Alaska</option>
-        <option>California</option>
-        <option>Delaware</option>
-        <option>Tennessee</option>
-        <option>Texas</option>
-        <option>Washington</option>
-      </select>
-      </br>
-      <button type="submit" class="btn btn-primary btn-flat pull-right" >Listar Snapshots</button>
+      <button type="submit" class="btn btn-primary btn-flat pull-right" >Crear snapshot</button>
     </section>
   </div>
 </script>

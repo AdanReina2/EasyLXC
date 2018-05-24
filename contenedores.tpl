@@ -42,7 +42,7 @@
                 <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
         </li>
         <li class="treeview">
-        	<li><a href="http://172.16.101.170/zabbix/hosts.php?ddreset=1"><i class="fa fa-bar-chart"></i>Zabbix (Métricas)</a></li>
+        	<li><a href="http://172.16.101.170/zabbix/hosts.php?ddreset=1"><img src="/static/images/zabbix.jpg"></i>Zabbix (Métricas)</a></li>
         </li>
         <li class="treeview">
         	<li><a href="/redes"><i class="fa fa-edit"></i>Redes</a></li>
@@ -105,7 +105,8 @@
 	        <td>
 		  <div class="btn-group">
 		    <a class="btn btn-success btn-flat" href="/start/{{lista[i]["nombre"]}}" title="Encender"><i class="fa fa-play"></i></a>
-                    <button type="button" class="btn btn-warning btn-flat disabled" title="Apagar"><i class="fa fa-pause"></i></button>
+                    <button type="button" class="btn btn-primary btn-flat disabled" title="Reiniciar"><i class="fa fa-refresh"></i></button>
+		    <button type="button" class="btn btn-warning btn-flat disabled" title="Apagar"><i class="fa fa-pause"></i></button>
                     <button type="button" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar-{{lista[i]["nombre"]}}" title="Eliminar">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
@@ -139,7 +140,7 @@
   		    <ul class="dropdown-menu" role="menu">
 		      <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
     		      <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
-    		      <li><a href="/formcrearsnapshot/{{lista[i]["nombre"]}}">Crear snapshot</a></li>
+    		      <li><a href="/listsnapshots/{{lista[i]["nombre"]}}">Administrar snapshots</a></li>
   		    </ul>
 		  </div>
 	        </td>
@@ -147,6 +148,7 @@
 		<td>
                   <div class="btn-group">
 		    <button type="button" class="btn btn-success btn-flat disabled" title="Encender"><i class="fa fa-play"></i></button>
+		    <a class="btn btn-primary btn-flat" href="/restart/{{lista[i]["nombre"]}}" title="Reiniciar"><i class="fa fa-refresh"></i></a>
 		    <a class="btn btn-warning btn-flat" href="/stop/{{lista[i]["nombre"]}}" title="Apagar"><i class="fa fa-pause"></i></a>
 		    <button type="button" class="btn btn-danger btn-flat" data-toggle="modal" data-target="#eliminar-{{lista[i]["nombre"]}}" title="Eliminar">
                 	<i class="fa fa-times" aria-hidden="true"></i>
@@ -180,6 +182,7 @@
                     <ul class="dropdown-menu" role="menu">
 		      <li><a href="/conectar/{{lista[i]["nombre"]}}">Conectar</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
+		      <li><a href="/listsnapshots/{{lista[i]["nombre"]}}">Administrar snapshots</a></li>
 		      <li><a href="/suspend">Suspender</a></li>
                     </ul>
                   </div>

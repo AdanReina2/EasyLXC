@@ -151,7 +151,7 @@ def listsnapshots(name):
 	uptime = commands.getoutput("uptime -p")
 	container = client.containers.get(name)
 	snapshots = container.snapshots.all()
-	return template('snapshots.tpl',user=usuario,snapshots=snapshots,uptime=uptime)
+	return template('snapshots.tpl',user=usuario,snapshots=snapshots,uptime=uptime,name=name)
 
 @route('/viewinfocontainer/<name>')
 def viewinfocontainer(name):
