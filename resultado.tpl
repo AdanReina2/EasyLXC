@@ -98,7 +98,7 @@
               <p>Total de contenedores</p>
             </div>
             <div class="icon">
-              <i class="ion ion-arrow-up-b"></i>
+              <i class="ion ion-tux"></i>
             </div>
             <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
