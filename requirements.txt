@@ -1,0 +1,7 @@
+bottle
+lxml
+requests
+ws4py
+psycopg2
+pylxd
+pyzabbix
