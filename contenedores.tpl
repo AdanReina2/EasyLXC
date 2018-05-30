@@ -211,7 +211,7 @@
         </table>
       <div>
 	</br>
-	<a class="btn btn-primary btn-flat pull-right" display="inline-block" href="/crearcontenedor"><i class="fa fa-plus-square" aria-hidden="true"></i>
+	<a class="btn btn-primary btn-flat pull-right" display="inline-block" href="/crearcontenedor"><i aria-hidden="true"></i>
   Nuevo contenedor</a>
       </div>
     </section>

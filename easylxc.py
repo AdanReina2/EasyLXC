@@ -149,9 +149,23 @@ def crearsnapshot(name):
 @route('/listsnapshots/<name>',method='get')
 def listsnapshots(name):
 	uptime = commands.getoutput("uptime -p")
-	container = client.containers.get(name)
-	snapshots = container.snapshots.all()
-	return template('snapshots.tpl',user=usuario,snapshots=snapshots,uptime=uptime,name=name)
+	numsnap = commands.getoutput('lxc list | grep '+name+' | cut -d"|" -f7')
+	snapshots = commands.getoutput('lxc info '+name+' | tail -2')
+	listasnap = []
+	lista = []
+	linea = snapshots.split("\n")
+	for i in linea:
+		listasnap = []
+		campos = i.split("(")
+		nombre = campos[0]
+		creacion = campos[1]
+		estado = campos[2]
+		listasnap.append(nombre.strip())
+		listasnap.append(creacion.rstrip("( "))
+		listasnap.append(estado.rstrip("( "))
+		lista.append(listasnap)
+		print lista
+	return template('snapshots.tpl',user=usuario,lista=lista,uptime=uptime,name=name)
 
 @route('/viewinfocontainer/<name>')
 def viewinfocontainer(name):

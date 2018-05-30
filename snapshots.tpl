@@ -78,7 +78,7 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Snapshots de <strong>{{ name }}</strong>
+        Snapshots del contenedor <strong>{{ name }}</strong>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -86,7 +86,30 @@
       </ol>
     </section>
     <section class="content">
-      <button type="submit" class="btn btn-primary btn-flat pull-right" >Crear snapshot</button>
+      <div>
+	<table class="paleBlueRows">
+	  <thead>
+	    <tr>
+	      <th>Nombre</th>
+	      <th>Fecha de Creación</th>
+	      <th>Estado</th>
+	      <th>Acciones</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    % for i in lista:
+	      <tr>
+	        <td>{{ i[0] }}</td>
+		<td>{{ i[1] }}</td>
+		<td>{{ i[2] }}</td>
+		<td>Acciones</td>
+	      </tr>
+	    % end
+	  </tbody>
+	</table>
+      </br>
+      <a class="btn btn-primary btn-flat pull-right" display="inline-block" href="/formcrearsnapshot/{{ name }}"><i aria-hidden="true"></i>
+  Nueva Snapshot</a>
     </section>
   </div>
 </script>
