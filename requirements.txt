@@ -3,5 +3,6 @@ lxml
 requests
 ws4py
 psycopg2
+psycopg2-binary
 pylxd
 pyzabbix
