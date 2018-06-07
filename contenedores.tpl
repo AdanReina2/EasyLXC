@@ -9,6 +9,14 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">UPTIME</li>
+        <li class="treeview">
+          <a href="/inicio">
+            <i class="fa fa-arrow-up"></i> <span>{{ uptime }}</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
         <li class="treeview">
 		<li><a href="/"><i class="fa fa-window-maximize"></i>Página principal</a></li>
@@ -22,27 +30,8 @@
                 <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
         </li>
         <li class="treeview">
-        	<li><a href="http://192.168.43.69/zabbix/hosts.php?ddreset=1"><img src="/static/images/zabbix.jpg"></i>Zabbix (Métricas)</a></li>
+        	<li><a href="http://192.168.43.69/zabbix/hosts.php?ddreset=1"><img src="/static/images/zabbix-logo.png"></i>  Zabbix (Métricas)</a></li>
         </li>
-        <li class="treeview">
-        	<li><a href="/redes"><i class="fa fa-edit"></i>Redes</a></li>
-        </li>
-        <li class="header">ALERTAS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Criticas</span>
-          <span class="pull-right-container">
-            <small class="label pull-right bg-red">1</small>
-          </span>
-        </a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Importantes</span>
-          <span class="pull-right-container">
-            <small class="label pull-right bg-yellow">1</small>
-          </span>
-        </a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Informativas</span>
-          <span class="pull-right-container">
-            <small class="label pull-right bg-blue">1</small>
-          </span>
-        </a></li>
       </ul>
     </section>
   </aside>

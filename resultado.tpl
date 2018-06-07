@@ -5,26 +5,6 @@
     <a href="/inicio" class="logo">
       <span class="logo-lg"><img src="/static/images/logo.png"></span>
     </a>
-    <nav class="navbar navbar-static-top">
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/static/dist/img/user.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{user}}</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="user-header">
-                <img src="static/dist/img/user.png" class="img-circle" alt="User Image">
-                <p>
-                  Bienvenido, {{user}}
-                </p>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
   </header>
   <aside class="main-sidebar">
     <section class="sidebar">
@@ -51,27 +31,8 @@
                 <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
         </li>
         <li class="treeview">
-        	<li><a href="/graficas"><i class="fa fa-pie-chart"></i>Gráficas</a></li>
+                <li><a href="http://192.168.43.69/zabbix/hosts.php?ddreset=1"><img src="/static/images/zabbix-logo.png"></i>  Zabbix (Métricas)</a></li>
         </li>
-        <li class="treeview">
-        	<li><a href="/redes"><i class="fa fa-edit"></i>Redes</a></li>
-        </li>
-        <li class="header">ALERTAS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Criticas</span>
-          <span class="pull-right-container">
-            <small class="label pull-right bg-red">1</small>
-          </span>
-        </a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Importantes</span>
-          <span class="pull-right-container">
-            <small class="label pull-right bg-yellow">1</small>
-          </span>
-        </a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Informativas</span>
-          <span class="pull-right-container">
-            <small class="label pull-right bg-blue">1</small>
-          </span>
-        </a></li>
       </ul>
     </section>
   </aside>
@@ -97,9 +58,6 @@
 
               <p>Total de contenedores</p>
             </div>
-            <div class="icon">
-              <i class="ion ion-tux"></i>
-            </div>
             <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
@@ -113,7 +71,7 @@
             <div class="icon">
               <i class="ion ion-arrow-up-b"></i>
             </div>
-	    <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <div class="col-md-4">
@@ -126,7 +84,7 @@
             <div class="icon">
               <i class="ion ion-arrow-down-b"></i>
             </div>
-	    <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="/contenedores" class="small-box-footer">Ver todos los contenedores <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
       </div>

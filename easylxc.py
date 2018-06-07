@@ -159,18 +159,23 @@ def listsnapshots(name):
 	listasnap = []
 	lista = []
 	linea = snapshots.split("\n")
-	for i in linea:
-		listasnap = []
-		campos = i.split("(")
-		nombre = campos[0]
-		creacion = campos[1]
-		estado = campos[2]
-		listasnap.append(nombre.strip())
-		listasnap.append(creacion.rstrip("( "))
-		listasnap.append(estado.rstrip("( "))
-		lista.append(listasnap)
-		print lista
-	return template('snapshots.tpl',user=usuario,lista=lista,uptime=uptime,name=name)
+	print numsnap
+	if numsnap.strip() == "0":
+		sinsnap = "Este contenedor no tiene snapshots"
+	else:
+		for i in linea:
+			listasnap = []
+			campos = i.split("(")
+			nombre = campos[0]
+			creacion = campos[1]
+			estado = campos[2]
+			listasnap.append(nombre.strip())
+			listasnap.append(creacion.rstrip("( "))
+			listasnap.append(estado.rstrip("( "))
+			lista.append(listasnap)
+			print lista
+		return template('snapshots.tpl',user=usuario,lista=lista,uptime=uptime,name=name)
+	return template('nosnapshots.tpl',user=usuario,sinsnap=sinsnap,uptime=uptime,name=name)
 
 @route('/viewinfocontainer/<name>')
 def viewinfocontainer(name):
