@@ -12,17 +12,14 @@ import socket
 from pylxd import Client
 client = Client()
 
-usuario = getpass.getuser()
 nombre_equipo = socket.gethostname()
 iphost = socket.gethostbyname(nombre_equipo)
 conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',host=iphost)
 cur = conn.cursor()
-
-print iphost
+uptime = commands.getoutput("uptime -p")
 
 @route('/')
 def inicio():
-	uptime = commands.getoutput("uptime -p")
 	totalactivos = 0
 	totalapagados = 0
 	total = 0
@@ -51,11 +48,10 @@ def inicio():
 			totalactivos = totalactivos + 1
 		else:
 			totalapagados = totalapagados + 1
-	return template('resultado.tpl',user=usuario,apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime,modelprocessor=modelprocessor,limiteram=limiteram,disktotal=disktotal,diskused=diskused,limitedisk=limitedisk,total=total)
+	return template('resultado.tpl',apagados=totalapagados,activos=totalactivos,ramtotal=ramtotal,ramused=ramused,uptime=uptime,modelprocessor=modelprocessor,limiteram=limiteram,disktotal=disktotal,diskused=diskused,limitedisk=limitedisk,total=total)
 
 @route('/contenedores')
 def contenedores():
-	uptime = commands.getoutput("uptime -p")
 	todos = client.containers.all()
 	imagenes = client.images.all()
 	lista = []
@@ -80,12 +76,12 @@ def contenedores():
 		ip = ip.rstrip(" |")
 		lista.append({"nombre":i.name,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":"None","arch":i.architecture,"ip":ip})
 		lenlista = lenlista + 1
-	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima,uptime=uptime,iphost=iphost)
+	return template('contenedores.tpl',lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima,uptime=uptime,iphost=iphost)
 
 @route('/snapshots')
 def snapshots():
 	uptime = commands.getoutput("uptime -p")
-	return template('snapshots.tpl',user=usuario,uptime=uptime)
+	return template('snapshots.tpl',uptime=uptime)
 
 @route('/conectar/<name>',method='get')
 def conectar(name):
@@ -117,7 +113,7 @@ def start(name):
         conttoactivate.freeze()
         redirect ('/contenedores')
 
-@route('/restart/<name>',method='get')
+@route('/restart/<name>',method='get',uptime=uptime)
 def restart(name):
 	conttorestart = client.containers.get(name)
 	conttorestart.restart()
@@ -125,8 +121,7 @@ def restart(name):
 
 @route('/rename/<name>',method='get')
 def rename(name):
-	uptime = commands.getoutput("uptime -p")
-	return template('rename.tpl',user=usuario,nombre=name,uptime=uptime)
+	return template('rename.tpl',nombre=name,uptime=uptime)
 
 @route('/rename2/<name>',method='post')
 def rename2(name):
@@ -137,8 +132,7 @@ def rename2(name):
 
 @route('/formcrearsnapshot/<name>')
 def formcrearsnapshot(name):
-	uptime = commands.getoutput("uptime -p")
-	return template('formcrearsnapshot.tpl',user=usuario,name=name,uptime=uptime)
+	return template('formcrearsnapshot.tpl',name=name,uptime=uptime)
 
 @route('/crearsnapshot/<name>',method='post')
 def crearsnapshot(name):
@@ -153,7 +147,6 @@ def crearsnapshot(name):
 
 @route('/listsnapshots/<name>',method='get')
 def listsnapshots(name):
-	uptime = commands.getoutput("uptime -p")
 	numsnap = commands.getoutput('lxc list | grep '+name+' | cut -d"|" -f7')
 	snapshots = commands.getoutput('lxc info '+name+' | tail -2')
 	listasnap = []
@@ -175,11 +168,10 @@ def listsnapshots(name):
 			lista.append(listasnap)
 			print lista
 		return template('snapshots.tpl',user=usuario,lista=lista,uptime=uptime,name=name)
-	return template('nosnapshots.tpl',user=usuario,sinsnap=sinsnap,uptime=uptime,name=name)
+	return template('nosnapshots.tpl',sinsnap=sinsnap,uptime=uptime,name=name)
 
 @route('/viewinfocontainer/<name>')
 def viewinfocontainer(name):
-	uptime = commands.getoutput("uptime -p")
 	info = commands.getoutput('lxc info '+name+' > /usr/share/files/'+name+'.txt')
 	file = open('/usr/share/files/'+name+'.txt')
 	leer = file.readlines()
@@ -187,17 +179,17 @@ def viewinfocontainer(name):
 	for i in leer:
 		lista.append(i)
 	lenlista = len(lista)
-	return template('viewinfocontainer.tpl',user=usuario,info=info,lenlista=lenlista,lista=lista,name=name,uptime=uptime)
+	return template('viewinfocontainer.tpl',info=info,lenlista=lenlista,lista=lista,name=name,uptime=uptime)
 
 @route('/crearcontenedor')
 def crearcontenedor():
-	return template('crearcontenedor.tpl',user=usuario)
+	return template('crearcontenedor.tpl',uptime=uptime)
 
 @route('/crearcontenedor2/<dist>/<rel>')
 def crearcontenedor2(dist,rel):
 	distro = dist
 	release = rel
-	return template('crearcontenedor2.tpl',user=usuario,distro=distro,release=release)
+	return template('crearcontenedor2.tpl',distro=distro,release=release,uptime=uptime)
 
 @route('/crearcontenedor3/<distro>/<release>',method='post')
 def crearcontenedor3(distro,release):
@@ -217,14 +209,6 @@ def eliminarcontenedor(nombre):
 	container = 'lxc delete ' + str(nombre) + ' --force'
 	os.system(container)
 	redirect ('/contenedores')
-
-@route('/graficas')
-def graficas():
-	return template('graficas.tpl',user=usuario)
-
-@route('/redes')
-def redes():
-	return template('redes.tpl',user=usuario)
 
 @route('/static/<filepath:path>')
 def server_static(filepath):

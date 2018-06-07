@@ -20,7 +20,7 @@
         <li class="header">MENÚ</li>
         <li class="active treeview">
           <a href="/">
-	    <i class="fa fa-window-maximize"></i>Pagina Principal</a>
+	    <i class="fa fa-window-maximize"></i>Página principal</a>
 	  </a>
         </li>
 	</a>

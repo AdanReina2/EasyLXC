@@ -5,37 +5,21 @@
     <a href="index2.html" class="logo">
       <span class="logo-lg"><b>EasyLXC</b></span>
     </a>
-    <nav class="navbar navbar-static-top">
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/static/dist/img/user.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{user}}</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="user-header">
-                <img src="static/dist/img/user.png" class="img-circle" alt="User Image">
-                <p>
-                  Bienvenido, {{user}}
-                </p>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </nav>
   </header>
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">UPTIME</li>
+        <li class="treeview">
+          <a href="/inicio">
+            <i class="fa fa-arrow-up"></i> <span>{{ uptime }}</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
         <li class="treeview">
-        	<li><a href="/inicio"><i class="fa fa-window-maximize"></i>Página principal</a><li>
+        	<li><a href="/"><i class="fa fa-window-maximize"></i>Página principal</a><li>
         </li>
         <li class="active treeview">
           <a href="/contenedores">
@@ -43,10 +27,10 @@
           </a>
         </li>
         <li class="treeview">
-        	<li><a href="/graficas"><i class="fa fa fa-pie-chart"></i>Gráficas</a></li>
+                <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
         </li>
         <li class="treeview">
-        	<li><a href="/redes"><i class="fa fa-edit"></i>Redes</a></li>
+        	<li><a href="http://192.168.43.69/zabbix/hosts.php?ddreset=1"><img src="/static/images/zabbix-logo.png"></i>  Zabbix (Métricas)</a></li>
         </li>
       </ul>
     </section>
