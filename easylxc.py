@@ -8,12 +8,17 @@ import datetime
 import psycopg2, psycopg2.extras
 import getpass
 import os
+import socket
 from pylxd import Client
 client = Client()
 
 usuario = getpass.getuser()
-conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',host='172.16.101.170')
+nombre_equipo = socket.gethostname()
+iphost = socket.gethostbyname(nombre_equipo)
+conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',host=iphost)
 cur = conn.cursor()
+
+print iphost
 
 @route('/')
 def inicio():
@@ -73,9 +78,9 @@ def contenedores():
 		ip = commands.getoutput("lxc list " + i.name + " -c '4' | tail -2 | head -1")
 		ip = ip.lstrip("| ")
 		ip = ip.rstrip(" |")
-		lista.append({"nombre":i.name,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":imagencont,"arch":i.architecture,"ip":ip})
+		lista.append({"nombre":i.name,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":"None","arch":i.architecture,"ip":ip})
 		lenlista = lenlista + 1
-	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima,uptime=uptime)
+	return template('contenedores.tpl',user=usuario,lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima,uptime=uptime,iphost=iphost)
 
 @route('/snapshots')
 def snapshots():
