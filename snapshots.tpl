@@ -18,8 +18,8 @@
       </ul>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
-        <li class="active treeview">
-          <a href="/inicio">
+        <li class="treeview">
+          <a href="/">
 	    <i class="fa fa-window-maximize"></i>Pagina Principal</a>
 	  </a>
         </li>
@@ -27,7 +27,7 @@
         <li class="treeview">
                 <li><a href="/contenedores"><i class="fa fa-cubes"></i>Contenedores</a></li>
         </li>
-	<li class="treeview">
+	<li class="active treeview">
                 <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
         </li>
         <li class="treeview">

@@ -80,14 +80,13 @@ def contenedores():
 
 @route('/snapshots')
 def snapshots():
-	uptime = commands.getoutput("uptime -p")
-	return template('snapshots.tpl',uptime=uptime)
-
-@route('/conectar/<name>',method='get')
-def conectar(name):
-	cad = "lxc exec " + name + " bash"
-	os.system("env -u SESSION_MANAGER xterm -e "+cad+" &")
-	redirect ('/contenedores')
+	todos = client.containers.all()
+        lista = []
+	lenlista = 0
+        for i in todos:
+                lista.append(i.name)
+		lenlista = lenlista + 1
+	return template('formversnapshot.tpl',uptime=uptime,lista=lista,lenlista=lenlista)
 
 @route('/start/<name>',method='get')
 def start(name):
@@ -145,6 +144,11 @@ def crearsnapshot(name):
 		snap = container.snapshots.create(snapname, stateful=False, wait=True)
 	redirect ('/listsnapshots/' + str(name))
 
+@route('/intsnap',method='post')
+def intsnap():
+	name = request.forms.get('opcion')
+	redirect ('/listsnapshots/' + str(name))
+
 @route('/listsnapshots/<name>',method='get')
 def listsnapshots(name):
 	numsnap = commands.getoutput('lxc list | grep '+name+' | cut -d"|" -f7')
@@ -167,7 +171,7 @@ def listsnapshots(name):
 			listasnap.append(estado.rstrip("( "))
 			lista.append(listasnap)
 			print lista
-		return template('snapshots.tpl',user=usuario,lista=lista,uptime=uptime,name=name)
+		return template('snapshots.tpl',lista=lista,uptime=uptime,name=name)
 	return template('nosnapshots.tpl',sinsnap=sinsnap,uptime=uptime,name=name)
 
 @route('/viewinfocontainer/<name>')

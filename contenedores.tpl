@@ -149,10 +149,8 @@
         	    </div>
         	    <!-- /.modal -->
                     <ul class="dropdown-menu" role="menu">
-		      <li><a href="/conectar/{{lista[i]["nombre"]}}">Conectar</a></li>
                       <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
 		      <li><a href="/listsnapshots/{{lista[i]["nombre"]}}">Administrar snapshots</a></li>
-		      <li><a href="/suspend">Suspender</a></li>
                     </ul>
                   </div>
                 </td>
