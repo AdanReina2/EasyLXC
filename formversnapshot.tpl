@@ -25,12 +25,14 @@
             <i class="fa fa-cubes"></i> <span>Contenedores</span>
           </a>
         </li>
-        <li class="active treeview">
-                <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
+	<li class="active treeview">
+          <a href="/snapshots">
+            <i class="fa fa-camera-retro"></i><span>Snapshots</span>
+          </a>
         </li>
-        <li class="treeview">
-        	<li><a href="http://192.168.43.69/zabbix/hosts.php?ddreset=1"><img src="/static/images/zabbix-logo.png"></i>  Zabbix (Métricas)</a></li>
-        </li>
+	<li class="treeview">
+	  <li><a href="/monitor"><i class="fa fa-dashboard"></i>Monitorización de Ping</a></li>
+	</li>
       </ul>
     </section>
   </aside>

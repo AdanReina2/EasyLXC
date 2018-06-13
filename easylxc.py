@@ -12,10 +12,6 @@ import socket
 from pylxd import Client
 client = Client()
 
-nombre_equipo = socket.gethostname()
-iphost = socket.gethostbyname(nombre_equipo)
-conn = psycopg2.connect(database='easylxc',user='userlxc',password='easylxc',host=iphost)
-cur = conn.cursor()
 uptime = commands.getoutput("uptime -p")
 
 @route('/')
@@ -53,30 +49,18 @@ def inicio():
 @route('/contenedores')
 def contenedores():
 	todos = client.containers.all()
-	imagenes = client.images.all()
 	lista = []
-	listaima = []
 	img = {}
 	contenedor = {}
 	lenlista = 0
-	lenlistaima = 0
-	for a in imagenes:
-		listaima.append({"nombre":a.properties["description"],"code":a.fingerprint})
-		lenlistaima = lenlistaima + 1
 	for i in todos:
-		cur.execute("select * from contenedores")
-		rows = cur.fetchall()
-		for z in rows:
-			if i.name == z[0]:
-				imagencont = str(z[1]) + " " + str(z[2])
-			else:
-				imagencont = "None"
+		imagen = commands.getoutput('cat /var/lib/lxd/containers/' + i.name + '/metadata.yaml | grep description | cut -d"(" -f1 | cut -d":" -f2')
 		ip = commands.getoutput("lxc list " + i.name + " -c '4' | tail -2 | head -1")
 		ip = ip.lstrip("| ")
 		ip = ip.rstrip(" |")
-		lista.append({"nombre":i.name,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":"None","arch":i.architecture,"ip":ip})
+		lista.append({"nombre":i.name,"estado":i.status,"alive":i.created_at[0:19].replace("T"," "),"imagen":imagen,"arch":i.architecture,"ip":ip})
 		lenlista = lenlista + 1
-	return template('contenedores.tpl',lista=lista,lenlista=lenlista,tipo=type(lenlista),listaima=listaima,lenlistaima=lenlistaima,uptime=uptime,iphost=iphost)
+	return template('contenedores.tpl',lista=lista,lenlista=lenlista,tipo=type(lenlista),uptime=uptime)
 
 @route('/snapshots')
 def snapshots():
@@ -182,7 +166,6 @@ def listsnapshots(name):
 			listasnap = []
 			campos = i.split("(")
 			nombre = campos[0]
-			print campos
 			creacion = campos[1]
 			estado = campos[2]
 			creacion = creacion.lstrip("taken at ")
@@ -213,12 +196,6 @@ def crearcontenedor3(distro,release):
 	name = request.forms.get('nombre')
 	container = 'lxc launch images:'+str(distro)+'/'+str(release)+'/amd64 '+str(name)
 	os.system(container)
-	cur.execute("insert into contenedores values (\'" + str(name) + "\',\'" + str(distro) + "\',\'" + str(release) + "\')")
-	cur.execute("select * from contenedores")
-	rows = cur.fetchall()
-	for i in rows:
-		print i
-	conn.commit()
 	redirect ('/contenedores')
 
 @route('/eliminarcontenedor/<nombre>',method='get')

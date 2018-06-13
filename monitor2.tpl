@@ -18,10 +18,8 @@
       </ul>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
-        <li class="active treeview">
-          <a href="/">
-	    <i class="fa fa-window-maximize"></i>Página principal</a>
-	  </a>
+        <li class="treeview">
+                <li><a href="/"><i class="fa fa-window-maximize"></i>Página principal</a><li>
         </li>
 	</a>
         <li class="treeview">
@@ -30,8 +28,10 @@
 	<li class="treeview">
                 <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
         </li>
-        <li class="treeview">
-                <li><a href="http://192.168.43.69/zabbix/hosts.php?ddreset=1"><img src="/static/images/zabbix-logo.png"></i>  Zabbix (Métricas)</a></li>
+	<li class="active treeview">
+          <a href="/monitor">
+            <i class="fa fa fa-dashboard"></i><span>Monitorización de Ping</span>
+          </a>
         </li>
       </ul>
     </section>
@@ -43,7 +43,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Principal</li>
+        <li class="active">Monitorización</li>
       </ol>
     </section>
     <section class="content">
