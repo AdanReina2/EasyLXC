@@ -227,6 +227,33 @@ def eliminarcontenedor(nombre):
 	os.system(container)
 	redirect ('/contenedores')
 
+@route('/monitor')
+def monitor():
+	todos = client.containers.all()
+        lista = []
+        lenlista = 0
+        for i in todos:
+                lista.append(i.name)
+                lenlista = lenlista + 1
+	return template('monitor.tpl',uptime=uptime,lista=lista,lenlista=lenlista)
+
+@route('/monitor2',method='post')
+def monitor2():
+	name = request.forms.get('opcion')
+	ip = commands.getoutput('lxc list | grep ' + name + ' | cut -d"|" -f4 | cut -d" " -f2')
+	num = [1,2,3,4,5,6,7,8,9]
+	lisping = []
+	lenlisping = 0
+	if ip == "":
+		lisping.append("Este contenedor no tiene ip por lo que no se puede realizar el ping hacia el")
+		lenlisping = 1
+	else:
+		for i in num:
+			ping = commands.getoutput('ping -c4 ' + str(ip) + '| head -' + str(i) + ' | tail -1')
+			lisping.append(ping)
+			lenlisping = lenlisping + 1
+	return template('monitor2.tpl',uptime=uptime,name=name,lisping=lisping,ip=ip,lenlisping=lenlisping)
+
 @route('/static/<filepath:path>')
 def server_static(filepath):
    return static_file(filepath, root='static')
