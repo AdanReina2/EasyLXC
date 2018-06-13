@@ -154,23 +154,6 @@
                     </ul>
                   </div>
                 </td>
-	      % else:
-		<td>
-                  <div class="btn-group">
-		    <a class="btn btn-default btn-flat" href="/activar/{{lista[i]["nombre"]}}">Activar</a>
-                    <button type="button" class="btn btn-default btn-flatdropdown-toggle"
-                          data-toggle="dropdown">
-                      <span class="caret"></span>
-                      <span class="sr-only">Desplegar menú</span>
-                    </button>
-
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="/rename/{{lista[i]["nombre"]}}">Renombrar</a></li>
-                      <li><a href="/viewinfocontainer/{{lista[i]["nombre"]}}">Ver información</a></li>
-		      <li><a class="btn btn-danger btn-flat" data-target="#eliminar-combinador" href="/eliminarcontenedor/{{lista[i]["nombre"]}}">Eliminar contenedor</a></li>
-                    </ul>
-                  </div>
-                </td>
 	      % end
 	    </tr>
 	  % end

@@ -9,14 +9,25 @@
   <aside class="main-sidebar">
     <section class="sidebar">
       <ul class="sidebar-menu" data-widget="tree">
+	<li class="header">UPTIME</li>
+	<li class="treeview">
+	  <a href="/">
+	    <i class="fa fa-arrow-up"></i> <span>{{ uptime }}</span>
+	  </a>
+	</li>
+      </ul>
+      <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENÚ</li>
         <li class="treeview">
           <a href="/">
-            <i class="fa fa-window-maximize"></i> <span>Página principal</span>
-          </a>
+	    <i class="fa fa-window-maximize"></i>Página principal</a>
+	  </a>
         </li>
-        <li class="active treeview">
-                <li><a href="/contenedores"><i class="fa fa-cubes"></i>Contenedores</a></li>
+	</a>
+	<li class="active treeview">
+          <a href="/contenedores">
+            <i class="fa fa fa-cubes"></i><span>Contenedores</span>
+          </a>
         </li>
 	<li class="treeview">
                 <li><a href="/snapshots"><i class="fa fa-camera-retro"></i>Snapshots</a></li>
@@ -39,9 +50,7 @@
       </ol>
     </section>
     <section class="content">
-      % for i in xrange(lenlista):
-	{{ lista[i] }}</br>
-      % end
+      {{ info }}
     </section>
   </div>
 %include('foot.tpl')

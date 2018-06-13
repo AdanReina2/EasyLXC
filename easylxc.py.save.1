@@ -82,11 +82,16 @@ def contenedores():
 def snapshots():
 	todos = client.containers.all()
         lista = []
-	lenlista = 0
+        lenlista = 0
         for i in todos:
-                lista.append(i.name)
-		lenlista = lenlista + 1
-	return template('formversnapshot.tpl',uptime=uptime,lista=lista,lenlista=lenlista)
+                lenlista = lenlista + 1
+	return template('formversnapshot.tpl',uptime=uptime)
+
+@route('/conectar/<name>',method='get')
+def conectar(name):
+	cad = "lxc exec " + name + " bash"
+	os.system("env -u SESSION_MANAGER xterm -e "+cad+" &")
+	redirect ('/contenedores')
 
 @route('/start/<name>',method='get')
 def start(name):
@@ -129,18 +134,6 @@ def rename2(name):
 	conttorename.rename(newname,wait=True)
 	redirect ('/contenedores')
 
-@route('/renamesnap/<namesnap>/<namecont>',method='get')
-def rename(namesnap,namecont):
-        return template('renamesnap.tpl',nombresnap=namesnap,nombrecont=namecont,uptime=uptime)
-
-@route('/renamesnap2/<namesnap>/<namecont>',method='post')
-def rename2(namesnap,namecont):
-        newname = request.forms.get('newname')
-        cont = client.containers.get(namecont)
-	snaptorename = cont.snapshots.get(namesnap)
-        snaptorename.rename(newname,wait=True)
-        redirect ('/listsnapshots/' + str(namecont))
-
 @route('/formcrearsnapshot/<name>')
 def formcrearsnapshot(name):
 	return template('formcrearsnapshot.tpl',name=name,uptime=uptime)
@@ -158,16 +151,17 @@ def crearsnapshot(name):
 
 @route('/intsnap',method='post')
 def intsnap():
-	name = request.forms.get('opcion')
+	name = request.forms.get('nombre')
 	redirect ('/listsnapshots/' + str(name))
 
 @route('/listsnapshots/<name>',method='get')
 def listsnapshots(name):
 	numsnap = commands.getoutput('lxc list | grep '+name+' | cut -d"|" -f7')
-	snapshots = commands.getoutput('lxc info '+name+' | tail -n'+numsnap)
+	snapshots = commands.getoutput('lxc info '+name+' | tail -2')
 	listasnap = []
 	lista = []
 	linea = snapshots.split("\n")
+	print numsnap
 	if numsnap.strip() == "0":
 		sinsnap = "Este contenedor no tiene snapshots"
 	else:
@@ -175,21 +169,26 @@ def listsnapshots(name):
 			listasnap = []
 			campos = i.split("(")
 			nombre = campos[0]
-			print campos
 			creacion = campos[1]
 			estado = campos[2]
-			creacion = creacion.lstrip("taken at ")
 			listasnap.append(nombre.strip())
-			listasnap.append(creacion.rstrip(") "))
-			listasnap.append(estado.rstrip(") "))
+			listasnap.append(creacion.rstrip("( "))
+			listasnap.append(estado.rstrip("( "))
 			lista.append(listasnap)
+			print lista
 		return template('snapshots.tpl',lista=lista,uptime=uptime,name=name)
 	return template('nosnapshots.tpl',sinsnap=sinsnap,uptime=uptime,name=name)
 
 @route('/viewinfocontainer/<name>')
 def viewinfocontainer(name):
-	info = commands.getoutput("less /var/lib/lxd/containers/" + name + "/metadata.yaml")
-	return template('viewinfocontainer.tpl',name=name,uptime=uptime,info=info)
+	info = commands.getoutput('lxc info '+name+' > /usr/share/files/'+name+'.txt')
+	file = open('/usr/share/files/'+name+'.txt')
+	leer = file.readlines()
+	lista = []
+	for i in leer:
+		lista.append(i)
+	lenlista = len(lista)
+	return template('viewinfocontainer.tpl',info=info,lenlista=lenlista,lista=lista,name=name,uptime=uptime)
 
 @route('/crearcontenedor')
 def crearcontenedor():
