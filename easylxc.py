@@ -141,6 +141,13 @@ def rename2(namesnap,namecont):
         snaptorename.rename(newname,wait=True)
         redirect ('/listsnapshots/' + str(namecont))
 
+@route('/eliminarsnap/<namesnap>/<namecont>',method='get')
+def eliminarsnap(namesnap,namecont):
+	cont = client.containers.get(namecont)
+	snaptodelete = cont.snapshots.get(namesnap)
+	snaptodelete.delete(wait=True)
+	redirect ('/listsnapshots/' + str(namecont))
+
 @route('/formcrearsnapshot/<name>')
 def formcrearsnapshot(name):
 	return template('formcrearsnapshot.tpl',name=name,uptime=uptime)
